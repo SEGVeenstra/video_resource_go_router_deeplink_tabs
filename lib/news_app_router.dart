@@ -9,13 +9,7 @@ class NewsAppRouter extends GoRouter {
         routingConfig: ValueNotifier(RoutingConfig(routes: _routes)),
       );
 
-  void goToLatest() {
-    go('/latest');
-  }
-
-  void goToTrending() {
-    go('/trending');
-  }
+  // TODO: Add navigation methods for latest and trending tabs
 
   static NewsAppRouter of(BuildContext context) {
     return GoRouter.of(context) as NewsAppRouter;
@@ -27,13 +21,7 @@ extension NewsAppRouterExt on BuildContext {
 }
 
 final _routes = <RouteBase>[
-  GoRoute(path: '/', redirect: (context, state) => '/latest'),
-  GoRoute(
-    path: '/:tab',
-    builder: (context, state) {
-      final tab = state.pathParameters['tab'];
-      final tabIndex = tab == 'latest' ? 0 : 1;
-      return TabbedNewsPage(key: Key('news'), tabIndex: tabIndex);
-    },
-  ),
+  GoRoute(path: '/', builder: (context, state) => TabbedNewsPage()),
+
+  // TODO: Add routes for tabs
 ];
